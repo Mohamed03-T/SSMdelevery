@@ -15,6 +15,7 @@ import com.fsdm.pfe.delix.dto.request.UpdatePasswordRequestDto;
 import com.fsdm.pfe.delix.entity.Customer;
 import org.springframework.security.core.Authentication;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CustomerService {
@@ -33,4 +34,6 @@ public interface CustomerService {
     void logoutCustomer(Authentication auth);
 
     void updatePassword(String email, UpdatePasswordRequestDto updatePasswordRequestDto);
+
+    List<Customer> loadAllCustomers();
 }
