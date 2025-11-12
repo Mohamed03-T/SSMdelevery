@@ -319,7 +319,7 @@
                                             showAlert({type: "success",message: data.message })
 
 
-                                            if (data.error != null) {
+                                            if (data.error != null && Array.isArray(data.error)) {
                                                 data.error.forEach(function (error) {
 
                                                     $('input[name="' + error.field + '"]').addClass('not-valid-item');

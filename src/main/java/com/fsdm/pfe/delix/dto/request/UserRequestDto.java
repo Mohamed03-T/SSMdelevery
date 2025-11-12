@@ -36,7 +36,7 @@ public class UserRequestDto implements Serializable {
     @Email(message = "email not valid")
     String email;
 
-    @Pattern(message = "not valid moroccan number", regexp = "^\\+212[5-7]\\d{8}$")
+    @Pattern(message = "not valid algerian number", regexp = "^\\+213[5-7]\\d{8}$")
     String phoneNumber;
 
     @NotNull

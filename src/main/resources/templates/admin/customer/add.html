@@ -307,70 +307,7 @@
                         </form>
 
                         <script>
-                            const showAlert = (data) => {
-                                let { type, message } = data;
-                                let autoClose = data.autoClose === undefined ? 3000 : data.autoClose;
-
-                                let toastContainer = document.createElement('div');
-                                toastContainer.classList.add('toast-container');
-                                var container = document.querySelector('.toast-container');
-                                if (typeof (container) != 'undefined' && container != null) return;
-                                document.body.appendChild(toastContainer);
-                                
-                                let icon;
-                                if(type == 'error') {
-                                    icon = 'fa-circle-exclamation';
-                                } else if(type == 'success'){
-                                    icon = 'fa-circle-check';
-                                } else if(type == 'warning'){
-                                    icon = 'fa-triangle-exclamation';
-                                } else if(type == 'info'){
-                                    icon = 'fa-circle-info';
-                                }
-
-                                let alert = `<div class="inAlert ${type}">
-                                    <div class="wrapper">
-                                        <div class="icon">
-                                            <i class="fa-solid ${icon}"></i>
-                                        </div>
-                                        <div class="details">
-                                            <div class="title">${type}</div>
-                                            <div class="message">${message}</div>
-                                        </div>
-                                    </div>
-                                    <i class="fa-solid fa-xmark closeAlert"></i>
-                                </div>`;
-                                
-                                toastContainer.insertAdjacentHTML('afterbegin', alert);
-                                
-                                setTimeout(() => {
-                                    var isAlert = document.querySelector('.inAlert');
-                                    if (typeof (isAlert) != 'undefined' && isAlert != null) isAlert.classList.add('slide-in');
-                                }, 100);
-
-                                setTimeout(() => {
-                                    var isAlert = document.querySelector('.inAlert');
-                                    if (typeof (isAlert) != 'undefined' && isAlert != null) isAlert.classList.remove('slide-in');
-                                    setTimeout(() => {
-                                        document.querySelector('.inAlert').remove();
-                                        removeToast();
-                                    }, 100);
-                                }, autoClose);
-
-                                let closeBtn = document.querySelector('.closeAlert');
-                                closeBtn.addEventListener('click', () => {
-                                    document.querySelector('.inAlert').classList.remove('slide-in');
-                                    setTimeout(() => {
-                                        document.querySelector('.inAlert').remove();
-                                        removeToast();
-                                    }, 100);
-                                });
-                            };
-
-                            const removeToast = () => {
-                                var container = document.querySelector('.toast-container');
-                                if (!container.hasChildNodes()) container.remove();
-                            };
+                            // showAlert function is already defined in toaster.js
                         </script>
 
                         <script>
@@ -397,7 +334,7 @@
                                     } else {
                                         showAlert({type: "error", message: data.message});
 
-                                        if (data.error != null) {
+                                        if (data.error != null && Array.isArray(data.error)) {
                                             // Clear previous validation errors
                                             $('input, select, textarea').removeClass('not-valid-item');
                                             

@@ -47,7 +47,7 @@ public class CustomerRequestDto implements Serializable {
 
     @NotEmpty
     @NotNull
-    @Pattern(regexp = Constants.MOROCCAN_NUMBER_REGEXP)
+    @Pattern(regexp = Constants.ALGERIAN_NUMBER_REGEXP, message = "Le numéro de téléphone doit être au format algérien (+213XXXXXXXXX)")
     String phoneNumber;
 
     AddressRequestDto address;

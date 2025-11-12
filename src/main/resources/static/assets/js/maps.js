@@ -11,9 +11,17 @@
 var map;
 var marker;
 
-function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 32.8792832, lng: -5.685523},
+// Make initMap available globally for Google Maps callback
+window.initMap = function() {
+    // Check if map element exists
+    const mapElement = document.getElementById('map');
+    if (!mapElement) {
+        console.log("Map element not found on this page");
+        return;
+    }
+
+    map = new google.maps.Map(mapElement, {
+        center: {lat: 36.7538, lng: 3.0588}, // Algiers, Algeria
         zoom: 6
     });
 

@@ -19,6 +19,7 @@ import com.fsdm.pfe.delix.service.CustomerService;
 import com.fsdm.pfe.delix.service.Impl.location.ProvinceServiceImpl;
 import com.fsdm.pfe.delix.util.Constants;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CsrfToken;
@@ -27,10 +28,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 import org.springframework.validation.Validator;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -47,6 +52,13 @@ public class CustomerController {
         this.customerService = customerService;
         this.validator = validator;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
     @GetMapping("/admin/customer/add")
@@ -94,6 +106,21 @@ public class CustomerController {
                 generatedPassword = cleanFirstName + currentYear;
             }
             customer.setPassword(passwordEncoder.encode(generatedPassword));
+            
+            // Set date of birth
+            if (customerRequestDto.getDateOfBirth() != null) {
+                customer.setDateOfBirth(customerRequestDto.getDateOfBirth());
+            }
+            
+            // Set CIN
+            if (customerRequestDto.getCin() != null && !customerRequestDto.getCin().isEmpty()) {
+                customer.setCin(customerRequestDto.getCin());
+            }
+            
+            // Set image URL if provided
+            if (customerRequestDto.getImage() != null && !customerRequestDto.getImage().isEmpty()) {
+                customer.setImage(customerRequestDto.getImage());
+            }
             
             // Set status
             if (customerRequestDto.getStatus() != null) {
