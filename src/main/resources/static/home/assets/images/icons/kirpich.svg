@@ -2,7 +2,7 @@
 <svg width="60px" height="46px" viewBox="0 0 60 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>Wall brick@3x</title>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Wall-brick" fill="#F5AF00" fill-rule="nonzero">
+    <g id="Wall-brick" fill="#2fff2f" fill-rule="nonzero">
             <path d="M20,46 L1,46 C0.44771525,46 0,45.5522847 0,45 L0,34 C0,33.4477153 0.44771525,33 1,33 L20,33 C20.5522847,33 21,33.4477153 21,34 L21,45 C21,45.5522847 20.5522847,46 20,46 Z M2,44 L19,44 L19,35 L2,35 L2,44 Z" id="Shape"></path>
             <path d="M39,46 L20,46 C19.4477153,46 19,45.5522847 19,45 L19,34 C19,33.4477153 19.4477153,33 20,33 L39,33 C39.5522847,33 40,33.4477153 40,34 L40,45 C40,45.5522847 39.5522847,46 39,46 Z M21,44 L38,44 L38,35 L21,35 L21,44 Z" id="Shape"></path>
             <path d="M59,46 L39,46 C38.4477153,46 38,45.5522847 38,45 L38,34 C38,33.4477153 38.4477153,33 39,33 L59,33 C59.5522847,33 60,33.4477153 60,34 L60,45 C60,45.5522847 59.5522847,46 59,46 Z M40,44 L58,44 L58,35 L40,35 L40,44 Z" id="Shape"></path>
