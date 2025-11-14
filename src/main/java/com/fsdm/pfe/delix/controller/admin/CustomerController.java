@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -159,6 +160,93 @@ public class CustomerController {
             model.addAttribute("customers", List.of());
         }
         return "admin/customer/listCustomers";
+    }
+
+    @GetMapping("/admin/customer/view/{id}")
+    public String viewCustomer(@PathVariable("id") Long id, Model model, CsrfToken csrfToken, RedirectAttributes redirectAttributes) {
+        model.addAttribute(Constants.CURRENT_PAGE, "/admin/customers");
+        try {
+            Customer customer = customerService.loadCustomerById(id);
+            if (customer == null) {
+                redirectAttributes.addFlashAttribute("error", "Client non trouvé");
+                return "redirect:/admin/customers";
+            }
+            
+            model.addAttribute("customer", customer);
+            
+            // Load provinces for address dropdown
+            List<Province> provinces = provinceService.loadAll();
+            model.addAttribute("provinces", ProvinceServiceImpl.convertListToDto(provinces));
+            model.addAttribute("csrf_token", csrfToken.getToken());
+            
+            return "admin/customer/view";
+        } catch (Exception e) {
+            log.error("Erreur lors du chargement du client : {}", e.getMessage(), e);
+            redirectAttributes.addFlashAttribute("error", "Erreur lors du chargement du client: " + e.getMessage());
+            return "redirect:/admin/customers";
+        }
+    }
+
+    @PostMapping("/admin/customer/update/{id}")
+    public ResponseEntity<ResponseDataDto> updateCustomer(@PathVariable("id") Long id, 
+                                                          CustomerRequestDto customerRequestDto) {
+        try {
+            Customer customer = customerService.loadCustomerById(id);
+            if (customer == null) {
+                return ResponseEntity.ok(ResponseDataDto.builder()
+                        .data(null)
+                        .success(false)
+                        .message("Client non trouvé")
+                        .error(null)
+                        .build());
+            }
+
+            // Update customer fields
+            customer.setFirstName(customerRequestDto.getFirstName());
+            customer.setLastName(customerRequestDto.getLastName());
+            customer.setEmail(customerRequestDto.getEmail());
+            customer.setPhoneNumber(customerRequestDto.getPhoneNumber());
+            
+            // Update password only if provided
+            if (customerRequestDto.getPassword() != null && !customerRequestDto.getPassword().isEmpty()) {
+                customer.setPassword(passwordEncoder.encode(customerRequestDto.getPassword()));
+            }
+            
+            // Update optional fields
+            if (customerRequestDto.getDateOfBirth() != null) {
+                customer.setDateOfBirth(customerRequestDto.getDateOfBirth());
+            }
+            
+            if (customerRequestDto.getCin() != null && !customerRequestDto.getCin().isEmpty()) {
+                customer.setCin(customerRequestDto.getCin());
+            }
+            
+            if (customerRequestDto.getImage() != null && !customerRequestDto.getImage().isEmpty()) {
+                customer.setImage(customerRequestDto.getImage());
+            }
+            
+            if (customerRequestDto.getStatus() != null) {
+                customer.setStatus(customerRequestDto.getStatus());
+            }
+            
+            customerService.updateCustomer(customer);
+            
+            return ResponseEntity.ok(ResponseDataDto.builder()
+                    .data(null)
+                    .success(true)
+                    .message("Client modifié avec succès")
+                    .error(null)
+                    .build());
+                    
+        } catch (Exception e) {
+            log.error("Erreur lors de la modification du client : {}", e.getMessage());
+            return ResponseEntity.ok(ResponseDataDto.builder()
+                    .data(null)
+                    .success(false)
+                    .message("Erreur lors de la modification: " + e.getMessage())
+                    .error(null)
+                    .build());
+        }
     }
 
     @PostMapping("/admin/customer/delete/{id}")

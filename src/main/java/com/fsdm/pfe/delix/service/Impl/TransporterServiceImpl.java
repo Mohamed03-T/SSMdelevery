@@ -14,9 +14,11 @@ import com.fsdm.pfe.delix.entity.Transporter;
 import com.fsdm.pfe.delix.model.enums.VehicleType;
 import com.fsdm.pfe.delix.repository.TransporterRepo;
 import com.fsdm.pfe.delix.service.TransporterService;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class TransporterServiceImpl implements TransporterService {
     private final TransporterRepo transporterRepo;
 
