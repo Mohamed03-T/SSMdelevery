@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="admin/partials/head.html :: head(titlePage='Delix | Clients')"></head>
+<head th:replace="~{admin/partials/head.html :: head(titlePage='Delix | Clients')}"></head>
 
 <body>
 
-<header th:replace="admin/partials/header.html :: header"></header>
+<header th:replace="~{admin/partials/header.html :: header}"></header>
 
-<aside th:replace="admin/partials/sidebar.html :: aside(currentPage='/admin/customers')"></aside>
+<aside th:replace="~{admin/partials/sidebar.html :: aside(currentPage='/admin/customers')}"></aside>
 
 <main id="main" class="main">
 
@@ -129,7 +129,7 @@
 
 </main>
 
-<footer th:replace="admin/partials/footer.html :: footer"></footer>
+<footer th:replace="~{admin/partials/footer.html :: footer}"></footer>
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
     <i class="bi bi-arrow-up-short"></i>

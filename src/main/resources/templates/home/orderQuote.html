@@ -281,7 +281,7 @@
                                                 closeLoading();
                                                 toast(data.message, "error");
 
-                                                if (data.error != null) {
+                                                if (data.error != null && Array.isArray(data.error)) {
                                                     data.error.forEach(function (error) {
                                                         $('#' + error.field).addClass('not-valid-item');
 

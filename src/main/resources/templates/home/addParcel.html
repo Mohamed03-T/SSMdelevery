@@ -116,7 +116,7 @@
                                     <div class="col-lg-6">
                                         <label class="el-form-item__label" for="pickupRequestAddress.contactNumber">Téléphone</label>
                                         <input th:value="${userDetails.phoneNumber}" type="tel"
-                                               pattern="(\+212|0)[567][0-9]{8}" class="form-control"
+                                               pattern="(\+213|0)[567][0-9]{8}" class="form-control"
                                                id="pickupRequestAddress.contactNumber"
                                                name="pickupRequestAddress.contactNumber" required>
                                     </div>
@@ -189,7 +189,7 @@
                                     <div class="col-lg-6">
                                         <label class="el-form-item__label"
                                                for="receiverAddress.contactNumber">Téléphone</label>
-                                        <input type="tel" pattern="(\+212|0)[567][0-9]{8}" class="form-control"
+                                        <input type="tel" pattern="(\+213|0)[567][0-9]{8}" class="form-control"
                                                id="receiverAddress.contactNumber" name="receiverAddress.contactNumber"
                                                required>
                                     </div>
@@ -360,7 +360,7 @@
                                                 closeLoading();
                                                 toast(data.message, "error");
 
-                                                if (data.error != null) {
+                                                if (data.error != null && Array.isArray(data.error)) {
                                                     data.error.forEach(function (error) {
 
                                                         $('input[name="' + error.field + '"]').addClass('not-valid-item');

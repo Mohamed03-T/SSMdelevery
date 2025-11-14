@@ -8,9 +8,17 @@
  * **
  */
 
-function initMap() {
-    // Map center coordinates
-    const center = { lat: 32.8792832, lng: -5.685523 };
+// Make initMap available globally for Google Maps callback
+window.initMap = function() {
+    // Check if map container exists
+    const mapContainer = document.getElementById("map-container");
+    if (!mapContainer) {
+        console.log("Map container not found on this page");
+        return;
+    }
+
+    // Map center coordinates - Algiers, Algeria
+    const center = { lat: 36.7538, lng: 3.0588 };
 
     // Map options
     const options = {
@@ -19,7 +27,7 @@ function initMap() {
     };
 
     // Create the map object
-    const map = new google.maps.Map(document.getElementById("map-container"), options);
+    const map = new google.maps.Map(mapContainer, options);
 
     fetch('/home/get_location_agencys', {
         method: 'GET', // or 'POST'

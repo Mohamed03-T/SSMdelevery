@@ -242,5 +242,9 @@ public class CustomerServiceImpl implements CustomerService, UserDetailsService 
         return customer.getParcels();
     }
 
+    @Override
+    public List<Customer> loadAllCustomers() {
+        return customerRepository.findAll();
+    }
 
 }
