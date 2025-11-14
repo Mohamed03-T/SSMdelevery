@@ -1,0 +1,77 @@
+/*
+ *
+ *  * @project : SSMDelivery
+ *  * @created : 18/05/2024, 19:02
+ *  * @modified : 18/05/2024, 19:02
+ *  * @description : This file is part of the SSMDelivery project.
+ *  * @license : MIT License
+ *
+ */
+
+package com.fsdm.pfe.ssmdelivery.dto.response;
+
+import com.fsdm.pfe.ssmdelivery.entity.Address;
+import com.fsdm.pfe.ssmdelivery.entity.User;
+import lombok.Builder;
+import lombok.Value;
+
+import java.time.ZonedDateTime;
+import java.util.Date;
+
+@Value
+@Builder
+public class MyUserResponseDto {
+
+    String firstName;
+
+
+    String lastName;
+
+
+    String email;
+
+
+    String role;
+
+
+    String phoneNumber;
+
+
+    Address address;
+
+
+    ZonedDateTime registeredAt;
+
+
+    ZonedDateTime lastUpdateDate;
+
+
+    String cin;
+
+    public MyUserResponseDto(String firstName, String lastName, String email, String role, String phoneNumber, Address address, ZonedDateTime registeredAt, ZonedDateTime lastUpdateDate, String cin) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.role = role;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.registeredAt = registeredAt;
+        this.lastUpdateDate = lastUpdateDate;
+        this.cin = cin;
+    }
+
+    public MyUserResponseDto(User user) {
+        this.cin = user.getCin();
+        this.lastUpdateDate = user.getLastUpdateDate();
+        this.registeredAt = user.getRegisteredAt();
+        this.address = user.getAddress();
+        this.phoneNumber = user.getPhoneNumber();
+        this.role = user.getRole();
+        this.email = user.getEmail();
+        this.lastName = user.getLastName();
+        this.firstName = user.getFirstName();
+    }
+}
+
+
+

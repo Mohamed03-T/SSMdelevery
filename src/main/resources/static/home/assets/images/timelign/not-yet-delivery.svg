@@ -1,9 +1,9 @@
 <!--
   -
-  -  * @project : DeliX
+  -  * @project : SSMDelivery
   -  * @created : 19/05/2024, 18:22
   -  * @modified : 19/05/2024, 18:22
-  -  * @description : This file is part of the DeliX project.
+  -  * @description : This file is part of the SSMDelivery project.
   -  * @license : MIT License
   -
   -->
@@ -19,3 +19,5 @@
         <path id="Path_62" d="M191.369 265.848a.737.737 0 0 0-1.042 0l-3.291 3.291-1.265-1.266a.737.737 0 0 0-1.042 1.042l1.787 1.787a.737.737 0 0 0 1.042 0l3.812-3.812a.737.737 0 0 0-.001-1.042z" class="cls-1"  transform="translate(-144.011 -252.584)"/>
     </g>
 </svg>
+
+

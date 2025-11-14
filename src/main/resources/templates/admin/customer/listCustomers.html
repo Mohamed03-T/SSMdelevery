@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="~{admin/partials/head.html :: head(titlePage='Delix | Clients')}"></head>
+<head th:replace="~{admin/partials/head.html :: head(titlePage='SSMDelivery | Clients')}"></head>
 
 <body>
 
@@ -65,7 +65,7 @@
                                     <span th:if="${customer.status} == 'LOCKED'" class="badge bg-danger">Verrouillé</span>
                                     <span th:if="${customer.status} == 'EXPIRED'" class="badge bg-secondary">Expiré</span>
                                 </td>
-                                <td th:text="${#temporals.format(customer.registeredAt, 'dd/MM/yyyy')}">01/01/2024</td>
+                                <td th:text="${#temporals.format(customer.registeredAt, 'dd/MM/yyyy')}">01/01/2025</td>
                                 <td>
                                     <div class="btn-group" role="group">
                                         <a th:href="@{'/admin/customer/view/' + ${customer.id}}" 
@@ -251,3 +251,9 @@
 </body>
 
 </html>
+
+
+
+
+
+

@@ -1,0 +1,83 @@
+/*
+ *
+ *  * @project : SSMDelivery
+ *  * @created : 11/05/2024, 14:24
+ *  * @modified : 11/05/2024, 14:24
+ *  * @description : This file is part of the SSMDelivery project.
+ *  * @license : MIT License
+ *
+ */
+
+package com.fsdm.pfe.ssmdelivery.service.Impl.location;
+
+import com.fsdm.pfe.ssmdelivery.dto.response.CityResponseDto;
+import com.fsdm.pfe.ssmdelivery.entity.City;
+import com.fsdm.pfe.ssmdelivery.repository.CityRepo;
+import com.fsdm.pfe.ssmdelivery.service.location.CityService;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class CityServiceImpl implements CityService {
+    private final CityRepo cityRepo;
+
+    public CityServiceImpl(CityRepo cityRepo) {
+        this.cityRepo = cityRepo;
+    }
+
+    public static List<CityResponseDto> convertListToDto(List<City> cities) {
+        return cities.stream()
+                .map(CityResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public City create(City city) {
+        return cityRepo.save(city);
+    }
+
+    @Override
+    public City update(City city) {
+        return cityRepo.save(city);
+    }
+
+    @Override
+    public City loadById(Long id) {
+        return cityRepo.findById(id).orElse(null);
+    }
+
+    @Override
+    public City loadByCode(String code) {
+        return cityRepo.findByCode(code).orElse(null);
+    }
+
+    @Override
+    public List<City> loadAll() {
+        return cityRepo.findAll();
+    }
+
+    @Override
+    public void delete(Long id) {
+        cityRepo.deleteById(id);
+    }
+
+    @Override
+    public void deleteByCode(String code) {
+        cityRepo.deleteByCode(code);
+    }
+
+    @Override
+    public List<City> saveAll(List<City> cities) {
+        return cityRepo.saveAll(cities);
+    }
+
+    @Override
+    public List<City> loadByProvinceCode(String provinceCode) {
+        return cityRepo.findByProvinceCode_Code(provinceCode);
+    }
+}
+
+
+

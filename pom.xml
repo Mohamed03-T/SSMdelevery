@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.suivi.colis</groupId>
-    <artifactId>DeliX</artifactId>
+    <artifactId>SSMDelivery</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>DeliX</name>
-    <description>DeliX</description>
+    <name>SSMDelivery</name>
+    <description>SSMDelivery</description>
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>

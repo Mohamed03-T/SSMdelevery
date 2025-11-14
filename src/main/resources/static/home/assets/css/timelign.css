@@ -1,9 +1,9 @@
 /*
  *
- *  * @project : DeliX
+ *  * @project : SSMDelivery
  *  * @created : 19/05/2024, 12:30
  *  * @modified : 19/05/2024, 12:30
- *  * @description : This file is part of the DeliX project.
+ *  * @description : This file is part of the SSMDelivery project.
  *  * @license : MIT License
  *
  */
@@ -406,3 +406,4 @@ padding: 0.5rem 0.8rem;
     animation-iteration-count: infinite;
 }
 @keyframes blink { 50% { border-color:#fff ; }  }
+

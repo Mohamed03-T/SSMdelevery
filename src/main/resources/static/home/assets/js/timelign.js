@@ -1,9 +1,9 @@
 /*
  *
- *  * @project : DeliX
+ *  * @project : SSMDelivery
  *  * @created : 19/05/2024, 16:40
  *  * @modified : 19/05/2024, 16:40
- *  * @description : This file is part of the DeliX project.
+ *  * @description : This file is part of the SSMDelivery project.
  *  * @license : MIT License
  *
  */
@@ -14,4 +14,6 @@ function expend_timeligh_result() {
     var div = document.querySelector('.suivi-result-div');
     div.scrollTop = div.scrollHeight;
 }
+
+
 

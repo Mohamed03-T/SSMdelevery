@@ -1,10 +1,10 @@
-# وثيقة توضيحية للمشروع (DeliX)
+# وثيقة توضيحية للمشروع (SSMDelivery)
 
 ملخص: هذا ملف README يشرح هيكل المشروع، وظيفة كل مجلد/ملف رئيسي، ووصف جداول قاعدة البيانات وأعمدتها (مستمدة من كائنات الـ JPA - الـ entity).
 
 ## نظرة عامة على المجلدات الرئيسية
 
-- `src/main/java/com/fsdm/pfe/delix`  
+- `src/main/java/com/fsdm/pfe/ssmdelivery`  
   حزمة التطبيق الأساسية. تحتوي على المجلدات الفرعية التالية (وصف عام لكلٍ):
 
   - `entity` — يحتوي على كائنات الـ JPA التي تمثل جداول قاعدة البيانات. كل ملف يمثل جدولاً (أو كياناً) مع الحقول (الأعمدة) والعلاقات.
@@ -17,17 +17,23 @@
   - `config` — ملفات ضبط وإعدادات الـ Spring (Security, Swagger, Jwt, AppConfig ...).
   - `exception` — تعريفات Exception handlers و Exceptions مخصصة.
   - `util`، `converters`, `validation` — أدوات مساعدة، محولات لقيم معينة، والـ Validators.
-  - ملفات أخرى: `DeliXApplication.java` (نقطة الانطلاق - main), خدمات الـ JWT، Email، S3، Firebase initializer...
+  - ملفات أخرى: `SSMDeliveryApplication.java` (نقطة الانطلاق - main), خدمات الـ JWT، Email، S3، Firebase initializer...
 
 - `src/main/resources`  
   - `application.properties` — إعدادات Spring / DB / سلوك التطبيق.
   - `data.sql` — بيانات تحميل افتراضية (إن وُجدت).
   - `templates` — صفحات Thymeleaf (واجهات html) المستخدمة في جزء الويب: `home/`, `admin/`, `error/`, ...
   - `static` — ملفات ثابتة (css, js, img, vendor).
-  - `firebase/delix-ma-firebase.json` — مفاتيح/إعدادات Firebase.
+  - `firebase/ssmdelivery-firebase.json` — مفاتيح/إعدادات Firebase.
   - `lang` — ملفات ترجمة الرسائل.
 
 - ملفات جذرية: `pom.xml`, `Dockerfile`, `readme.md`(الإنجليزي), سكربتات maven (`mvnw`, `mvnw.cmd`).
+
+---
+
+## ملف البداية (Main Class)
+
+- `SSMDeliveryApplication.java` — ملف البداية (SpringBootApplication). يشغل التطبيق.
 
 ## وصف سريع لبعض المجلدات والملفات المهمة (وظيفة كل ملف رئيسي)
 
