@@ -1,0 +1,30 @@
+/*
+ *
+ *  * @project : SSMDelivery
+ *  * @created : 16/05/2024, 18:54
+ *  * @modified : 16/05/2024, 18:54
+ *  * @description : This file is part of the SSMDelivery project.
+ *  * @license : MIT License
+ *
+ */
+
+package com.fsdm.pfe.ssmdelivery.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class NotificationRequest {
+    private String title;
+    private String body;
+    private String topic;
+    private String token;
+}
+
+
+

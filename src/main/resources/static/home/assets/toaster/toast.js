@@ -1,9 +1,9 @@
 /*
  *
- *  * @project : DeliX
+ *  * @project : SSMDelivery
  *  * @created : 09/05/2024, 17:52
  *  * @modified : 09/05/2024, 17:52
- *  * @description : This file is part of the DeliX project.
+ *  * @description : This file is part of the SSMDelivery project.
  *  * @license : MIT License
  *
  */
@@ -68,3 +68,5 @@ function clearToasts() {
     });
     toastTimeouts = [];
 }
+
+

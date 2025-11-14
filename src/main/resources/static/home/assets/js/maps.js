@@ -1,9 +1,9 @@
 /*
  * **
- *  * @project : DeliX
+ *  * @project : SSMDelivery
  *  * @created : 04/05/2024, 17:24
  *  * @modified : 04/05/2024, 17:24
- *  * @description : This file is part of the DeliX project.
+ *  * @description : This file is part of the SSMDelivery project.
  *  * @license : MIT License
  * **
  */
@@ -85,3 +85,5 @@ window.initMap = function() {
     // Add markers to the map
 
 }
+
+

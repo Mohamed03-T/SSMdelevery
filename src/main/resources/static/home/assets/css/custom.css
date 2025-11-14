@@ -1,9 +1,9 @@
 /*
  *
- *  * @project : DeliX
+ *  * @project : SSMDelivery
  *  * @created : 08/05/2024, 15:06
  *  * @modified : 08/05/2024, 15:06
- *  * @description : This file is part of the DeliX project.
+ *  * @description : This file is part of the SSMDelivery project.
  *  * @license : MIT License
  *
  */
@@ -237,3 +237,5 @@ input[type="email"], input[type="password"] {
     @include animation(slide 1s);
     display: block;
 }
+
+

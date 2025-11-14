@@ -1,9 +1,9 @@
 /*
  *
- *  * @project : DeliX
+ *  * @project : SSMDelivery
  *  * @created : 12/05/2024, 14:25
  *  * @modified : 12/05/2024, 14:25
- *  * @description : This file is part of the DeliX project.
+ *  * @description : This file is part of the SSMDelivery project.
  *  * @license : MIT License
  *
  */
@@ -74,3 +74,4 @@
         transform: translateX(-50%) translateY(100%);
     }
 }
+

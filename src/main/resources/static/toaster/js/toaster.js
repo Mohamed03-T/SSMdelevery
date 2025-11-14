@@ -1,9 +1,9 @@
 /*
  *
- *  * @project : DeliX
+ *  * @project : SSMDelivery
  *  * @created : 09/05/2024, 16:00
  *  * @modified : 09/05/2024, 16:00
- *  * @description : This file is part of the DeliX project.
+ *  * @description : This file is part of the SSMDelivery project.
  *  * @license : MIT License
  *
  */
@@ -86,3 +86,4 @@ btn.addEventListener('click', () => {
         message: toastMessage,
     })
 })*/
+

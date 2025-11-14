@@ -1,0 +1,24 @@
+/*
+ * **
+ *  * @project : SSMDelivery
+ *  * @created : 23/04/2024, 18:51
+ *  * @modified : 23/04/2024, 18:51
+ *  * @description : This file is part of the SSMDelivery project.
+ *  * @license : MIT License
+ *  **
+ */
+
+package com.fsdm.pfe.ssmdelivery.model.enums;
+
+import lombok.Getter;
+
+@Getter
+public enum VehicleType {
+    CAR,
+    TRUCK,
+    VAN,
+    MOTORCYCLE
+}
+
+
+

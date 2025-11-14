@@ -1,0 +1,31 @@
+/*
+ *
+ *  * @project : SSMDelivery
+ *  * @created : 12/05/2024, 21:39
+ *  * @modified : 12/05/2024, 21:39
+ *  * @description : This file is part of the SSMDelivery project.
+ *  * @license : MIT License
+ *
+ */
+
+package com.fsdm.pfe.ssmdelivery.dto.response;
+
+
+import lombok.Builder;
+import lombok.Value;
+
+import java.io.Serializable;
+
+@Value
+@Builder
+
+public class ResponseDataDto implements Serializable {
+    boolean success;
+    String message;
+    Object error;
+    Object data;
+
+}
+
+
+
