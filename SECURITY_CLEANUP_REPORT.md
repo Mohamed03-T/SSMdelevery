@@ -7,21 +7,21 @@
 ## ✅ What Was Done - ما تم إنجازه
 
 ### 1️⃣ Files Protected - الملفات المحمية
-- ✅ `src/main/java/com/fsdm/pfe/delix/util/Constants.java`
-- ✅ `src/main/resources/firebase/delix-ma-firebase.json`
+- ✅ `backend/src/main/java/com/fsdm/pfe/delix/util/Constants.java`
+- ✅ `backend/src/main/resources/firebase/delix-ma-firebase.json`
 
 ### 2️⃣ Security Improvements - التحسينات الأمنية
 
 #### Updated `.gitignore`:
 ```gitignore
-src/main/resources/application.properties
-src/main/resources/firebase/
-src/main/java/com/fsdm/pfe/delix/util/Constants.java
+backend/src/main/resources/application.properties
+backend/src/main/resources/firebase/
+backend/src/main/java/com/fsdm/pfe/delix/util/Constants.java
 
 # Keep template files
-!src/main/resources/application.properties.example
-!src/main/resources/firebase/delix-ma-firebase.json.example
-!src/main/java/com/fsdm/pfe/delix/util/Constants.java.example
+!backend/src/main/resources/application.properties.example
+!backend/src/main/resources/firebase/delix-ma-firebase.json.example
+!backend/src/main/java/com/fsdm/pfe/delix/util/Constants.java.example
 ```
 
 #### Created Template Files:
@@ -59,8 +59,8 @@ src/main/java/com/fsdm/pfe/delix/util/Constants.java
 1. **Restore Your Actual Credentials Locally:**
    ```powershell
    # Edit these files with your real credentials:
-   notepad src\main\java\com\fsdm\pfe\delix\util\Constants.java
-   notepad src\main\resources\firebase\delix-ma-firebase.json
+   notepad backend\src\main\java\com\fsdm\pfe\delix\util\Constants.java
+   notepad backend\src\main\resources\firebase\delix-ma-firebase.json
    ```
 
 2. **Verify .gitignore is working:**
@@ -125,13 +125,13 @@ src/main/java/com/fsdm/pfe/delix/util/Constants.java
 ```
 Modified:
   - .gitignore
-  - src/main/java/com/fsdm/pfe/delix/util/Constants.java
-  - src/main/resources/firebase/delix-ma-firebase.json
+   - backend/src/main/java/com/fsdm/pfe/delix/util/Constants.java
+   - backend/src/main/resources/firebase/delix-ma-firebase.json
 
 Added:
   + CONFIGURATION.md
-  + src/main/java/com/fsdm/pfe/delix/util/Constants.java.example
-  + src/main/resources/firebase/delix-ma-firebase.json.example
+   + backend/src/main/java/com/fsdm/pfe/delix/util/Constants.java.example
+   + backend/src/main/resources/firebase/delix-ma-firebase.json.example
   + cleanup-git-history.ps1 (documentation)
   + SECURITY_CLEANUP_REPORT.md (this file)
 ```

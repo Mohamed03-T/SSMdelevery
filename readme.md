@@ -31,7 +31,7 @@ In the future, this project aims to incorporate an intelligent transport optimiz
 
 3. Database Configuration
 
-The application uses MySQL as its database. You need to configure the database connection details in the `application.properties` file located in `src/main/resources/`.
+The application uses MySQL as its database. You need to configure the database connection details in the `application.properties` file located in `backend/src/main/resources/`.
 
 Here are the properties you need to set:
 
@@ -43,10 +43,18 @@ spring.datasource.password=<yourDatabassePassword> # keep it empty if you dont u
 
 4. **Run the project**
 
-   You can run the project by executing the following command:
+   The project server (backend) now lives in the `backend` folder. To run locally use the Maven wrapper from that folder (Windows):
 
-   ```bash
-   mvn spring-boot:run
+   ```powershell
+   cd backend
+   .\mvnw.cmd spring-boot:run
+   ```
+
+   Or run the packaged JAR from the `backend` folder:
+
+   ```powershell
+   cd backend
+   java -jar .\target\SSMDelivery-0.0.1-SNAPSHOT.jar
    ```
 5. **Access the application**
 
