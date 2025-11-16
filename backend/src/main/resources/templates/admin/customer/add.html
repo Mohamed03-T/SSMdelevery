@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="admin/partials/head.html :: head(titlePage='SSMDelivery | Ajouter Client')"></head>
+
+<body>
+
+<header th:replace="admin/partials/header.html :: header"></header>
+
+<aside th:replace="admin/partials/sidebar.html :: aside(currentPage='/admin/customer/add')"></aside>
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Ajouter un client</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/admin}">Admin</a></li>
+                <li class="breadcrumb-item">Clients</li>
+                <li class="breadcrumb-item active">Ajouter</li>
+            </ol>
+        </nav>
+    </div>
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Informations du Client</h5>
+
+                        <form id="add_customer_form" action="/admin/customer/add" method="post">
+                            <input type="hidden" name="_csrf" th:value="${csrf_token}"/>
+
+                            <div class="row mb-3">
+                                <!-- Colonne gauche - Informations personnelles -->
+                                <div class="col-lg-6">
+                                    
+                                    <h6 class="text-primary mb-3">Informations Personnelles</h6>
+                                    
+                                    <div class="row mb-3">
+                                        <label for="firstName" class="col-sm-3 col-form-label">Prénom <span class="text-danger">*</span></label>
+                                        <div class="col-sm-9">
+                                            <input type="text" name="firstName" id="firstName" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="lastName" class="col-sm-3 col-form-label">Nom <span class="text-danger">*</span></label>
+                                        <div class="col-sm-9">
+                                            <input type="text" name="lastName" id="lastName" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="email" class="col-sm-3 col-form-label">Email <span class="text-danger">*</span></label>
+                                        <div class="col-sm-9">
+                                            <input type="email" name="email" id="email" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="phoneNumber" class="col-sm-3 col-form-label">Téléphone <span class="text-danger">*</span></label>
+                                        <div class="col-sm-9">
+                                            <input type="text" name="phoneNumber" id="phoneNumber" 
+                                                   class="form-control" 
+                                                   placeholder="+213555123456" 
+                                                   pattern="^(\+213|0)[5-7]\d{8}$"
+                                                   required>
+                                            <small class="text-muted">Format: +213555123456 ou 0555123456</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="password" class="col-sm-3 col-form-label">Mot de passe</label>
+                                        <div class="col-sm-9">
+                                            <div class="input-group">
+                                                <input type="password" name="password" id="password" 
+                                                       class="form-control" 
+                                                       minlength="6"
+                                                       placeholder="Laisser vide pour génération auto">
+                                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                                    <i class="bi bi-eye" id="eyeIcon"></i>
+                                                </button>
+                                                <button class="btn btn-outline-primary" type="button" id="generatePassword" title="Générer automatiquement">
+                                                    <i class="bi bi-arrow-clockwise"></i>
+                                                </button>
+                                            </div>
+                                            <small class="text-muted">Laissez vide pour génération auto (prénom + année) ou saisissez un mot de passe personnalisé</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="cin" class="col-sm-3 col-form-label">CIN</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" name="cin" id="cin" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="dateOfBirth" class="col-sm-3 col-form-label">Date de naissance</label>
+                                        <div class="col-sm-9">
+                                            <input type="date" name="dateOfBirth" id="dateOfBirth" class="form-control">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="status" class="col-sm-3 col-form-label">Statut</label>
+                                        <div class="col-sm-9">
+                                            <select name="status" id="status" class="form-select">
+                                                <option value="ACTIVE">Actif</option>
+                                                <option value="EMAIL_NOT_VERIFIED">Email non vérifié</option>
+                                                <option value="LOCKED">Verrouillé</option>
+                                                <option value="EXPIRED">Expiré</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Colonne droite - Adresse -->
+                                <div class="col-lg-6">
+                                    
+                                    <h6 class="text-primary mb-3">Adresse</h6>
+
+                                    <div class="row mb-3">
+                                        <label for="province" class="col-sm-3 col-form-label">Province</label>
+                                        <div class="col-sm-9">
+                                            <select name="address.provinceCode" id="province" class="form-select">
+                                                <option disabled selected value>Sélectionnez la province</option>
+                                                <option th:each="province:${provinces}" 
+                                                        th:value="${province.code}"
+                                                        th:text="${province.name}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="city" class="col-sm-3 col-form-label">Ville</label>
+                                        <div class="col-sm-9">
+                                            <select name="address.cityCode" id="city" class="form-select">
+                                                <option disabled selected value>Sélectionnez la province d'abord</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="area" class="col-sm-3 col-form-label">Quartier</label>
+                                        <div class="col-sm-9">
+                                            <select name="address.areaCode" id="area" class="form-select">
+                                                <option disabled selected value>Sélectionnez la ville d'abord</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="address" class="col-sm-3 col-form-label">Adresse</label>
+                                        <div class="col-sm-9">
+                                            <textarea name="address.address" id="address" 
+                                                      class="form-control" 
+                                                      rows="3"
+                                                      placeholder="Numéro, rue, bâtiment..."></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="image" class="col-sm-3 col-form-label">Photo (URL)</label>
+                                        <div class="col-sm-9">
+                                            <input type="url" name="image" id="image" 
+                                                   class="form-control" 
+                                                   placeholder="https://exemple.com/photo.jpg">
+                                            <small class="text-muted">Lien vers la photo du client</small>
+                                        </div>
+                                    </div>
+
+                                    <!-- Informations supplémentaires -->
+                                    <div class="alert alert-info mt-4" role="alert">
+                                        <h6 class="alert-heading"><i class="bi bi-info-circle me-1"></i> Informations</h6>
+                                        <ul class="mb-0 small">
+                                            <li>Les champs marqués d'un <span class="text-danger">*</span> sont obligatoires</li>
+                                            <li>Le numéro de téléphone doit être au format algérien</li>
+                                            <li>Un email de bienvenue sera envoyé au client</li>
+                                            <li><strong>Mot de passe :</strong> Laissez vide pour génération automatique (<strong>prénom + année</strong>) ou saisissez-le manuellement</li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <script>
+                                $(document).ready(function () {
+                                    let isManualPassword = false;
+                                    
+                                    // Auto-generate password based on firstName + current year
+                                    function generatePassword() {
+                                        if (isManualPassword) return; // Don't auto-generate if user typed manually
+                                        
+                                        const firstName = $('#firstName').val().toLowerCase().trim();
+                                        const currentYear = new Date().getFullYear();
+                                        
+                                        if (firstName) {
+                                            // Remove accents and special characters
+                                            const cleanFirstName = firstName
+                                                .normalize('NFD')
+                                                .replace(/[\u0300-\u036f]/g, '')
+                                                .replace(/[^a-z]/g, '');
+                                            
+                                            const password = cleanFirstName + currentYear;
+                                            $('#password').val(password);
+                                        } else {
+                                            $('#password').val('');
+                                        }
+                                    }
+                                    
+                                    // Update password when firstName changes (only if not manual)
+                                    $('#firstName').on('input', function() {
+                                        if (!isManualPassword) {
+                                            generatePassword();
+                                        }
+                                    });
+                                    
+                                    // Detect manual password input
+                                    $('#password').on('input', function() {
+                                        const val = $(this).val();
+                                        if (val.length > 0) {
+                                            isManualPassword = true;
+                                        } else {
+                                            isManualPassword = false;
+                                            generatePassword();
+                                        }
+                                    });
+                                    
+                                    // Manual generate button
+                                    $('#generatePassword').on('click', function() {
+                                        isManualPassword = false;
+                                        generatePassword();
+                                    });
+                                    
+                                    // Toggle password visibility
+                                    $('#togglePassword').on('click', function() {
+                                        const passwordInput = $('#password');
+                                        const eyeIcon = $('#eyeIcon');
+                                        
+                                        if (passwordInput.attr('type') === 'password') {
+                                            passwordInput.attr('type', 'text');
+                                            eyeIcon.removeClass('bi-eye').addClass('bi-eye-slash');
+                                        } else {
+                                            passwordInput.attr('type', 'password');
+                                            eyeIcon.removeClass('bi-eye-slash').addClass('bi-eye');
+                                        }
+                                    });
+                                    
+                                    // Province change handler
+                                    $('#province').change(function () {
+                                        var provinceCode = $(this).val();
+                                        var provinceName = $(this).find('option:selected').text();
+
+                                        // Clear dependent dropdowns
+                                        $('#city').empty().append('<option disabled selected value>Chargement...</option>');
+                                        $('#area').empty().append('<option disabled selected value>Sélectionnez la ville d\'abord</option>');
+
+                                        // Fetch cities
+                                        $.get('/express/location/city?code=' + provinceCode, function (data) {
+                                            $('#city').empty().append('<option disabled selected value>Sélectionnez la ville</option>');
+                                            $.each(data.data, function (index, city) {
+                                                $('#city').append('<option value="' + city.code + '">' + city.name + '</option>');
+                                            });
+                                        });
+                                    });
+
+                                    // City change handler
+                                    $('#city').change(function () {
+                                        var cityCode = $(this).val();
+                                        var cityName = $(this).find('option:selected').text();
+
+                                        // Clear area dropdown
+                                        $('#area').empty().append('<option disabled selected value>Chargement...</option>');
+
+                                        // Fetch areas
+                                        $.get('/express/location/area?code=' + cityCode, function (data) {
+                                            $('#area').empty().append('<option disabled selected value>Sélectionnez le quartier</option>');
+                                            $.each(data.data, function (index, area) {
+                                                $('#area').append('<option value="' + area.code + '">' + area.name + '</option>');
+                                            });
+                                        });
+                                    });
+                                });
+                            </script>
+
+                            <div th:if="${message}" class="alert alert-dismissible fade show" role="alert"
+                                 th:classappend="@{|alert-${message.type}}" th:text="${message.message}">
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-lg-12 text-end">
+                                    <button type="button" class="btn btn-secondary me-2" onclick="window.location.href='/admin/customers'">
+                                        <i class="bi bi-x-circle me-1"></i> Annuler
+                                    </button>
+                                    <button class="btn btn-primary px-4" type="submit">
+                                        <i class="bi bi-check-circle me-1"></i> Enregistrer
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        <script>
+                            // showAlert function is already defined in toaster.js
+                        </script>
+
+                        <script>
+                            document.getElementById('add_customer_form').addEventListener('submit', function(event) {
+                                event.preventDefault();
+
+                                let url = this.action;
+                                let formData = new FormData(this);
+                                $('#loader-wrapper').show();
+
+                                fetch(url, {
+                                    method: 'POST',
+                                    body: formData
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    $('#loader-wrapper').hide();
+
+                                    if (data.success) {
+                                        showAlert({type: "success", message: data.message});
+                                        setTimeout(() => {
+                                            window.location.href = "/admin/customers";
+                                        }, 2000);
+                                    } else {
+                                        showAlert({type: "error", message: data.message});
+
+                                        if (data.error != null && Array.isArray(data.error)) {
+                                            // Clear previous validation errors
+                                            $('input, select, textarea').removeClass('not-valid-item');
+                                            
+                                            data.error.forEach(function (error) {
+                                                $('input[name="' + error.field + '"]').addClass('not-valid-item');
+                                                $('select[name="' + error.field + '"]').addClass('not-valid-item');
+                                                $('textarea[name="' + error.field + '"]').addClass('not-valid-item');
+                                            });
+                                        }
+                                    }
+
+                                    console.log(data);
+                                })
+                                .catch(error => {
+                                    $('#loader-wrapper').hide();
+                                    showAlert({type: "error", message: "Erreur lors de l'enregistrement"});
+                                    console.error('Error:', error);
+                                });
+                            });
+                        </script>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer th:replace="admin/partials/footer.html :: footer"></footer>
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i>
+</a>
+
+<script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/chart.js/chart.umd.js"></script>
+<script src="/assets/vendor/echarts/echarts.min.js"></script>
+<script src="/assets/vendor/quill/quill.js"></script>
+<script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="/assets/vendor/php-email-form/validate.js"></script>
+<script src="/loading/js/main.js"></script>
+<script src="/toaster/js/toaster.js"></script>
+<script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>
+
+
+
+
+
