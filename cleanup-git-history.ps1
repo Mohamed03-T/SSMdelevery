@@ -4,10 +4,10 @@
 Write-Host "🔒 Starting Git history cleanup..." -ForegroundColor Yellow
 Write-Host ""
 
-# Files to remove from history
+# Files to remove from history (updated to new backend paths)
 $filesToRemove = @(
-    "src/main/java/com/fsdm/pfe/delix/util/Constants.java",
-    "src/main/resources/firebase/delix-ma-firebase.json"
+    "backend/src/main/java/com/fsdm/pfe/delix/util/Constants.java",
+    "backend/src/main/resources/firebase/delix-ma-firebase.json"
 )
 
 Write-Host "📝 Files to remove from Git history:" -ForegroundColor Cyan
@@ -21,7 +21,7 @@ Write-Host "⚠️  Make sure you have pushed the latest commit first!" -Foregro
 Write-Host ""
 Write-Host "📋 Steps to complete:" -ForegroundColor Yellow
 Write-Host "1. Backup your current credentials (save Constants.java and firebase json)" -ForegroundColor White
-Write-Host "2. Run: git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch src/main/java/com/fsdm/pfe/delix/util/Constants.java src/main/resources/firebase/delix-ma-firebase.json' --prune-empty --tag-name-filter cat -- --all" -ForegroundColor White
+Write-Host "2. Run: git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch backend/src/main/java/com/fsdm/pfe/delix/util/Constants.java backend/src/main/resources/firebase/delix-ma-firebase.json' --prune-empty --tag-name-filter cat -- --all" -ForegroundColor White
 Write-Host "3. Run: git push origin --force --all" -ForegroundColor White
 Write-Host "4. Run: git push origin --force --tags" -ForegroundColor White
 Write-Host "5. Restore your credentials locally (copy from backup)" -ForegroundColor White

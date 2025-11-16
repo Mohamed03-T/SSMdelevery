@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{admin/partials/head.html :: head(titlePage='SSMDelivery | Liste des Transporteurs')}"></head>
+
+<body>
+
+<header th:replace="~{admin/partials/header.html :: header}"></header>
+
+<aside th:replace="~{admin/partials/sidebar.html :: aside(currentPage='/admin/transporters')}"></aside>
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Liste des transporteurs</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/admin}">Accueil</a></li>
+                <li class="breadcrumb-item active">Transporteurs</li>
+            </ol>
+        </nav>
+    </div>
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="card-title">Tous les transporteurs</h5>
+                            <a th:href="@{/admin/transporters/add}" class="btn btn-primary">
+                                <i class="bi bi-plus-circle"></i> Ajouter un nouveau transporteur
+                            </a>
+                        </div>
+
+                        <table class="table table-striped datatable">
+                            <thead>
+                                <tr>
+                                    <th>N° Employé</th>
+                                    <th>Nom complet</th>
+                                    <th>E-mail</th>
+                                    <th>Téléphone</th>
+                                    <th>Type de véhicule</th>
+                                    <th>Plaque</th>
+                                    <th>N° Enregistrement</th>
+                                    <th>État</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="transporter : ${transporters}">
+                                    <td th:text="${transporter.employeeNumber}">TR001</td>
+                                    <td th:text="${transporter.firstName + ' ' + transporter.lastName}">محمد علي</td>
+                                    <td th:text="${transporter.email}">transporter@example.com</td>
+                                    <td th:text="${transporter.phoneNumber}">+213555123456</td>
+                                    <td>
+                                        <span class="badge bg-info" th:text="${transporter.vehicleType?.name()}">TRUCK</span>
+                                    </td>
+                                    <td th:text="${transporter.vihiculeMtricule}">16-12345-16</td>
+                                    <td th:text="${transporter.registrationNumber}">REG001</td>
+                                    <td>
+                                        <span th:if="${transporter.status != null and transporter.status.name() == 'ACTIVE'}" 
+                                              class="badge bg-success">Actif</span>
+                                        <span th:if="${transporter.status != null and transporter.status.name() == 'LOCKED'}" 
+                                              class="badge bg-danger">Bloqué</span>
+                                        <span th:if="${transporter.status != null and transporter.status.name() == 'EXPIRED'}" 
+                                              class="badge bg-secondary">Expiré</span>
+                                        <span th:if="${transporter.status == null}" 
+                                              class="badge bg-secondary">Non défini</span>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{/admin/transporters/view/{id}(id=${transporter.id})}" 
+                                           class="btn btn-sm btn-info" title="Voir">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                        <a th:href="@{/admin/transporters/edit/{id}(id=${transporter.id})}" 
+                                           class="btn btn-sm btn-warning" title="Modifier">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <button class="btn btn-sm btn-danger" 
+                                                th:onclick="'deleteTransporter(' + ${transporter.id} + ')'" 
+                                                title="Supprimer">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer th:replace="~{admin/partials/footer.html :: footer}"></footer>
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i>
+</a>
+
+<script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/chart.js/chart.umd.js"></script>
+<script src="/assets/vendor/echarts/echarts.min.js"></script>
+<script src="/assets/vendor/quill/quill.js"></script>
+<script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="/assets/vendor/php-email-form/validate.js"></script>
+<script src="/loading/js/main.js"></script>
+<script src="/toaster/js/toaster.js"></script>
+<script src="/assets/js/main.js"></script>
+
+<script>
+    function deleteTransporter(id) {
+        if (confirm('Êtes-vous sûr de vouloir supprimer ce transporteur?')) {
+            $('#loader-wrapper').show();
+            
+            fetch('/admin/transporters/delete/' + id, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                $('#loader-wrapper').hide();
+                
+                if (data.success) {
+                    showAlert({type: "success", message: data.message});
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1500);
+                } else {
+                    showAlert({type: "error", message: data.message});
+                }
+            })
+            .catch(error => {
+                $('#loader-wrapper').hide();
+                showAlert({type: "error", message: "Erreur lors de la suppression"});
+                console.error('Error:', error);
+            });
+        }
+    }
+</script>
+
+</body>
+
+</html>
+
+
+
+
+

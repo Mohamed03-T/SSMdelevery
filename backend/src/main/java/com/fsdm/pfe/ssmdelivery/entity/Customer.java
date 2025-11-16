@@ -1,0 +1,96 @@
+/*
+ * **
+ *  * @project : SSMDelivery
+ *  * @created : 23/04/2024, 18:31
+ *  * @modified : 23/04/2024, 18:31
+ *  * @description : This file is part of the SSMDelivery project.
+ *  * @license : MIT License
+ *  **
+ */
+
+package com.fsdm.pfe.ssmdelivery.entity;
+
+import com.fsdm.pfe.ssmdelivery.dto.request.RegisterRequestDto;
+import com.fsdm.pfe.ssmdelivery.model.enums.Role;
+import com.fsdm.pfe.ssmdelivery.model.enums.UserStatus;
+import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@Entity
+@DiscriminatorValue(Role.CUSTOMER_ROLE)
+
+public class Customer extends User implements UserDetails {
+
+    @Column(unique = true)
+    private String customerNumber;
+
+    @OneToMany
+    private List<Parcel> parcels;
+
+
+    public Customer(RegisterRequestDto registerRequestDto) {
+        super.setEmail(registerRequestDto.getEmail());
+        super.setFirstName(registerRequestDto.getFirstName());
+        super.setLastName(registerRequestDto.getLastName());
+        super.setPassword(registerRequestDto.getPassword());
+        super.setPhoneNumber(registerRequestDto.getPhoneNumber());
+    }
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(ROLE_PREFIX + this.getRole()));
+        return authorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return super.getPassword();
+    }
+
+    @Override
+    public String getUsername() {
+        return this.getEmail();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return !this.getStatus().equals(UserStatus.EXPIRED);
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return !this.getStatus().equals(UserStatus.LOCKED);
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return this.getStatus() != null && (this.getStatus().equals(UserStatus.ACTIVE) || this.getStatus().equals(UserStatus.EMAIL_NOT_VERIFIED));
+    }
+
+
+}
+
+
+

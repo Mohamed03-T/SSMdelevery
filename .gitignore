@@ -43,5 +43,6 @@ src/main/java/com/fsdm/pfe/delix/util/Constants.java
 
 # Keep template files
 !src/main/resources/application.properties.example
-!src/main/resources/firebase/delix-ma-firebase.json.example
+!src/main/resources/firebase/ssmdelivery-firebase.json.example
 !src/main/java/com/fsdm/pfe/delix/util/Constants.java.example
+
