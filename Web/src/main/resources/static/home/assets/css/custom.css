@@ -84,8 +84,8 @@ input[type="email"], input[type="password"] {
     transform: scale(0.95);
     padding: 8px 20px;
     border-radius: 4px;
-    background-color: #F5AF00;
-    border-color: #ff8300;
+    background-color: #2fff2f;
+    border-color: #009b00;
     margin-top: 33px;
 }
 
@@ -129,13 +129,13 @@ input[type="email"], input[type="password"] {
 
 .unify-btn {
     color: #fff;
-    background-color: #F5AF00;
+    background-color: #2fff2f;
     border: none;
 }
 .unify-btn:hover {
     color: #fff;
-    background-color: rgba(245, 175, 0, 0.67);
-    border-color: #ff8300
+    background-color: rgba(47, 255, 47, 0.67);
+    border-color: #009b00
 }
 .opt-wrap[data-v-5e9121d4] {
     display: flex;

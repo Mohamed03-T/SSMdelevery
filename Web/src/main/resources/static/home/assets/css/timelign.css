@@ -14,7 +14,7 @@
     overflow-y: scroll;
     width: 0; height: 0;
     background-color: transparent;
-    border: 1px solid #F5AF00;
+    border: 1px solid #2fff2f;
     /*background-color: rgba(128, 128, 128, 0.87);*/
     border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;
 }
@@ -175,7 +175,7 @@
     text-decoration: none;
 }
 .cd__credit a:hover{
-    color: #F5AF00;
+    color: #2fff2f;
 }
 .cd__credit a:hover:after{
     font-family: FontAwesome;
@@ -242,7 +242,7 @@
     border: 1px solid #e5e5e5;
 }
 .tracking-item {
-    border-left: 4px solid #F5AF00;
+    border-left: 4px solid #2fff2f;
     position: relative;
     padding: 2rem 1.5rem 0.5rem 2.5rem;
     font-size: 0.9rem;
@@ -346,11 +346,11 @@ text-align: right!important;
     left: -1.1rem;
 }
 .tracking-item .tracking-icon.status-intransit {
-    color: #F5AF00;
+    color: #2fff2f;
     font-size: 0.6rem;
 }
 .tracking-item .tracking-icon.status-current {
-    color: #F5AF00;
+    color: #2fff2f;
     font-size: 0.6rem;
 }
 @media (min-width: 992px) {
