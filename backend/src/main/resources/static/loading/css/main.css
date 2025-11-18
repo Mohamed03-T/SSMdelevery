@@ -35,7 +35,7 @@ p {
     margin: -75px 0 0 -75px;
     border-radius: 50%;
     border: 3px solid transparent;
-    border-top-color: #ff8300;
+    border-top-color: #009b00;
 
     -webkit-animation: spin 2s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
     animation: spin 2s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
@@ -50,7 +50,7 @@ p {
         bottom: 5px;
         border-radius: 50%;
         border: 3px solid transparent;
-        border-top-color: #F5AF00;
+        border-top-color: #2fff2f;
 
         -webkit-animation: spin 3s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
         animation: spin 3s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
@@ -65,7 +65,7 @@ p {
         bottom: 15px;
         border-radius: 50%;
         border: 3px solid transparent;
-        border-top-color: #f9c922;
+        border-top-color: #2fff2f;
 
         -webkit-animation: spin 1.5s linear infinite; /* Chrome, Opera 15+, Safari 5+ */
           animation: spin 1.5s linear infinite; /* Chrome, Firefox 16+, IE 10+, Opera */
@@ -114,9 +114,9 @@ p {
     background-color: transparent;
     border: 0;
     overflow: hidden;
-    /* IE 6/7 fallback */
-    *text-indent: -9999px;
+    text-indent: -9999px; /* only if you need the image replacement technique */
 }
+
 
 .ir:before {
     content: "";
@@ -196,9 +196,12 @@ p {
 
 
 
-.clearfix {
-    *zoom: 1;
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
 }
+
 
 
 @media only screen and (min-width: 35em) {

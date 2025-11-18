@@ -60,7 +60,7 @@
 }
 
 .toast-container .inAlert.warning {
-    background-color: rgb(214 175 12 / 80%)
+    background-color: rgba(12, 214, 22, 0.8)
 }
 
 .toast-container i {

@@ -109,7 +109,7 @@ public class SecurityConfig {
         public SecurityFilterChain filterChainApp2(AuthenticationManager authenticationManager, HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
 
             MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
-            http.securityMatcher("/public/**", "/express/**", "/", "/login", "/logout", "/register", "/order-quote", "/reset-password", "/reset-password-request").authorizeHttpRequests(
+            http.securityMatcher("/public/**", "/express/**", "/", "/login", "/logout", "/register", "/order-quote", "/reset-password", "/reset-password-request", "/become-transporter").authorizeHttpRequests(
                             authorizationManagerRequestMatcherRegistry ->
                             {
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/express/location/city")).permitAll();
@@ -124,10 +124,11 @@ public class SecurityConfig {
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/order-quote")).permitAll();
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/reset-password")).permitAll();
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/reset-password-request")).permitAll();
+                                authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/become-transporter")).permitAll();
 
                                 authorizationManagerRequestMatcherRegistry.requestMatchers(mvcMatcherBuilder.pattern("/express/**")).hasRole(Role.CUSTOMER_ROLE);
                             }
-                    ).securityMatcher("/public/**", "/express/**", "/", "/login", "/logout", "/register", "/order-quote", "/reset-password", "/reset-password-request", "/verify", "/test/**")
+                    ).securityMatcher("/public/**", "/express/**", "/", "/login", "/logout", "/register", "/order-quote", "/reset-password", "/reset-password-request", "/verify", "/test/**", "/become-transporter")
                     .logout(httpSecurityLogoutConfigurer -> httpSecurityLogoutConfigurer.logoutUrl("/logout").logoutSuccessUrl("/login").deleteCookies("JSESSIONID"))
 
 

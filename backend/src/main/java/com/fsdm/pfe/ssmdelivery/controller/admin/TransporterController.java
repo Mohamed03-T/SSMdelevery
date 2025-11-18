@@ -181,6 +181,44 @@ public class TransporterController {
                             .build());
         }
     }
+
+    @PostMapping("/admin/transporters/approve/{id}")
+    public ResponseEntity<ResponseDataDto> approveTransporter(@org.springframework.web.bind.annotation.PathVariable("id") Long id) {
+        try {
+            Transporter transporter = transporterRepo.findById(id).orElse(null);
+            if (transporter == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(ResponseDataDto.builder()
+                                .success(false)
+                                .message("Transporteur introuvable")
+                                .build());
+            }
+
+            // Approve transporter by setting status to ACTIVE
+            transporter.setStatus(UserStatus.ACTIVE);
+            
+            // Generate employee number if not exists
+            if (transporter.getEmployeeNumber() == null || transporter.getEmployeeNumber().isEmpty()) {
+                transporter.setEmployeeNumber("TR" + System.currentTimeMillis());
+            }
+            
+            transporterRepo.save(transporter);
+
+            log.info("Transporter approved successfully: {}", transporter.getEmail());
+            return ResponseEntity.ok(ResponseDataDto.builder()
+                    .success(true)
+                    .message("Transporteur approuvé avec succès")
+                    .build());
+
+        } catch (Exception e) {
+            log.error("Error approving transporter: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(ResponseDataDto.builder()
+                            .success(false)
+                            .message("Erreur lors de l'approbation: " + e.getMessage())
+                            .build());
+        }
+    }
 }
 
 

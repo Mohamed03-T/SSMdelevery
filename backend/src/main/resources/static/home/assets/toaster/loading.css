@@ -11,8 +11,8 @@
 
 :root {
     --toastColor: oklch(1 0 89.876);
-    --warnColor: oklch(70% 0.15 50);
-    --errColor: oklch(0.655 0.155 29.949 / 0.79);
+    --warnColor: oklch(81.328% 0.24208 143.518);
+    --errColor: oklch(65.989% 0.2188 143.017 / 0.79);
 }
 
 .loadingy {
@@ -43,7 +43,7 @@
 
 .progress {
     border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid #f5af00; /* Blue */
+    border-top: 16px solid #2fff2f; /* Blue */
     border-radius: 50%;
     /*width: 50px;*/
     /*height: 50px;*/

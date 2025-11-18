@@ -15,6 +15,7 @@ import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -36,7 +37,7 @@ public class TransporterRequestDto {
     private String email;
 
     @NotBlank(message = "Le numéro de téléphone est obligatoire")
-    @Pattern(regexp = Constants.ALGERIAN_NUMBER_REGEXP, message = "Numéro de téléphone invalide. Format algérien requis: +213XXXXXXXXX ou 0XXXXXXXXX")
+    @Pattern(regexp = "^(\\+212|0)[5-7][0-9]{8}$", message = "Numéro de téléphone invalide. Format marocain requis: +212XXXXXXXXX ou 0XXXXXXXXX")
     private String phoneNumber;
 
     @NotBlank(message = "Le mot de passe est obligatoire")
@@ -46,6 +47,7 @@ public class TransporterRequestDto {
     private String cin;
 
     @Past(message = "La date de naissance doit être dans le passé")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
 
     @NotBlank(message = "Le numéro de permis de conduire est obligatoire")

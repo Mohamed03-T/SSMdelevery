@@ -11,7 +11,7 @@
 
 :root {
     --toastColor: oklch(1 0 89.876);
-    --warnColor: oklch(70% 0.15 50);
+    --warnColor: oklch(81.268% 0.24666 142.901);
     --errColor: oklch(0.655 0.155 29.949 / 0.79);
 }
 
@@ -97,8 +97,8 @@
 
 
 :root {
-    --primary: #F5AF00;
-    --primary-light: #ffcf58;
+    --primary: #00f50c;
+    --primary-light: #5eff58;
     --dark: #1c212e;
     --grey-dark: #3f4656;
     --grey: #6c7486;
@@ -292,7 +292,7 @@
     position: absolute;
     border-radius: 2px;
     transform: scaleX(0.8);
-    background: rgba(240, 220, 95, 1);
+    background: rgb(95, 240, 131);
 }
 .order .truck .light:before {
     content: '';

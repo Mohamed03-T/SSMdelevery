@@ -11,8 +11,8 @@
 
 :root {
     --toastColor: oklch(1 0 89.876);
-    --warnColor: oklch(70% 0.15 50);
-    --errColor: oklch(0.655 0.155 29.949 / 0.79);
+    --warnColor: oklch(81.681% 0.21775 147.389);
+    --errColor: oklch(80.276% 0.1969 146.52 / 0.79);
 }
 
 .toasty {
@@ -31,7 +31,7 @@
     animation: 6s ease-out 0s 1 both toasty;
 
     &.warning {
-        color: #e6a23c;
+        color: #2fff2f;
         background-color: #fdf6ec;
         border: 2px solid #faecd8;
     }
