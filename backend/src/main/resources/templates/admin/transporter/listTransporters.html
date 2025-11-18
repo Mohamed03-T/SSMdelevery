@@ -62,6 +62,8 @@
                                     <td>
                                         <span th:if="${transporter.status != null and transporter.status.name() == 'ACTIVE'}" 
                                               class="badge bg-success">Actif</span>
+                                        <span th:if="${transporter.status != null and transporter.status.name() == 'INACTIVE'}" 
+                                              class="badge bg-warning">En attente</span>
                                         <span th:if="${transporter.status != null and transporter.status.name() == 'LOCKED'}" 
                                               class="badge bg-danger">Bloqué</span>
                                         <span th:if="${transporter.status != null and transporter.status.name() == 'EXPIRED'}" 
@@ -78,6 +80,12 @@
                                            class="btn btn-sm btn-warning" title="Modifier">
                                             <i class="bi bi-pencil"></i>
                                         </a>
+                                        <button th:if="${transporter.status != null and transporter.status.name() == 'INACTIVE'}" 
+                                                class="btn btn-sm btn-success" 
+                                                th:onclick="'approveTransporter(' + ${transporter.id} + ')'" 
+                                                title="Approuver">
+                                            <i class="bi bi-check-lg"></i>
+                                        </button>
                                         <button class="btn btn-sm btn-danger" 
                                                 th:onclick="'deleteTransporter(' + ${transporter.id} + ')'" 
                                                 title="Supprimer">
@@ -142,6 +150,37 @@
             .catch(error => {
                 $('#loader-wrapper').hide();
                 showAlert({type: "error", message: "Erreur lors de la suppression"});
+                console.error('Error:', error);
+            });
+        }
+    }
+
+    function approveTransporter(id) {
+        if (confirm('Approuver ce transporteur?')) {
+            $('#loader-wrapper').show();
+            
+            fetch('/admin/transporters/approve/' + id, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                $('#loader-wrapper').hide();
+                
+                if (data.success) {
+                    showAlert({type: "success", message: data.message});
+                    setTimeout(() => {
+                        location.reload();
+                    }, 1200);
+                } else {
+                    showAlert({type: "error", message: data.message});
+                }
+            })
+            .catch(error => {
+                $('#loader-wrapper').hide();
+                showAlert({type: "error", message: "Erreur lors de l'approbation"});
                 console.error('Error:', error);
             });
         }

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{home/partials/head :: head}"></head>
+<body>
+<header th:replace="~{home/partials/header :: header}"></header>
+
+<div class="container mt-5" style="margin-top: 120px !important; margin-bottom: 60px;">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Devenir transporteur</h3>
+                    <p class="mb-0 small">Remplissez le formulaire ci-dessous pour soumettre votre demande</p>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/become-transporter}" method="post" id="becomeTransporterForm">
+                        <input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Prénom <span class="text-danger">*</span></label>
+                                <input type="text" name="firstName" class="form-control" required />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Nom <span class="text-danger">*</span></label>
+                                <input type="text" name="lastName" class="form-control" required />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Email <span class="text-danger">*</span></label>
+                                <input type="email" name="email" class="form-control" required />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Téléphone <span class="text-danger">*</span></label>
+                                <input type="text" name="phoneNumber" class="form-control" placeholder="+212600000000" required />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Mot de passe <span class="text-danger">*</span></label>
+                                <input type="password" name="password" class="form-control" required />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">CIN</label>
+                                <input type="text" name="cin" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Date de naissance</label>
+                                <input type="date" name="dateOfBirth" class="form-control" />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Numéro de permis <span class="text-danger">*</span></label>
+                                <input type="text" name="licenseNumber" class="form-control" required />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Plaque d'immatriculation <span class="text-danger">*</span></label>
+                                <input type="text" name="vehicleMatricule" class="form-control" required />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Type de véhicule <span class="text-danger">*</span></label>
+                                <select name="vehicleType" class="form-control" required>
+                                    <option value="">Sélectionner...</option>
+                                    <option th:each="vt : ${vehicleTypes}" th:value="${vt.name()}" th:text="${vt.name()}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Numéro d'enregistrement <span class="text-danger">*</span></label>
+                            <input type="text" name="registrationNumber" class="form-control" required />
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">Soumettre la demande</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{home/partials/footer :: footer}"></footer>
+
+<script>
+    document.getElementById('becomeTransporterForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+        const params = new URLSearchParams();
+        formData.forEach((v, k) => params.append(k, v));
+
+        // Show loading
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Envoi en cours...';
+
+        fetch('/become-transporter', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: params.toString()
+        })
+        .then(r => r.json())
+        .then(data => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+            
+            if (data.success) {
+                alert(data.message || 'Demande soumise avec succès! L\'administrateur examinera votre demande.');
+                form.reset();
+            } else {
+                alert(data.message || 'Erreur lors de la soumission');
+            }
+        })
+        .catch(err => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+            console.error(err);
+            alert('Erreur lors de la soumission de la demande');
+        });
+    });
+</script>
+</body>
+</html>
